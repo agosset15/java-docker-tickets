@@ -1,0 +1,29 @@
+{
+  "operation_type": "sale",
+  "operation_time": "2026-09-21T15:25:00+03:00",
+  "operation_place": "Postman demo",
+  "passenger": {
+    "name": "Ivan",
+    "surname": "Ivanov",
+    "patronymic": "Ivanovich",
+    "doc_type": "00",
+    "doc_number": "4510123456",
+    "birthdate": "2001-07-12",
+    "gender": "M",
+    "passenger_type": "student",
+    "ticket_number": "5552139265680",
+    "ticket_type": 1
+  },
+  "routes": [
+    {
+      "airline_code": "SU",
+      "flight_num": 1701,
+      "depart_place": "VVO",
+      "depart_datetime": "2026-10-02T09:20:00+10:00",
+      "arrive_place": "SVO",
+      "arrive_datetime": "2026-10-02T11:25:00+03:00",
+      "pnr_id": "THALSZ"
+    }
+  ]
+}
+

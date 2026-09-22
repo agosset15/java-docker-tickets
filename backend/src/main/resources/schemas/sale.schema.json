@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Продажа билета",
+  "type": "object",
+  "required": ["operation_type", "operation_time", "operation_place", "passenger", "routes"],
+  "properties": {
+    "operation_type": { "const": "sale" },
+    "operation_time": { "type": "string", "format": "date-time" },
+    "operation_place": { "type": "string", "minLength": 1 },
+    "passenger": {
+      "type": "object",
+      "required": ["name", "surname", "doc_type", "doc_number", "birthdate", "gender", "passenger_type", "ticket_number", "ticket_type"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "surname": { "type": "string", "minLength": 1 },
+        "patronymic": { "type": ["string", "null"] },
+        "doc_type": { "type": "string", "minLength": 1 },
+        "doc_number": { "type": "string", "minLength": 1 },
+        "birthdate": { "type": "string", "format": "date" },
+        "gender": { "enum": ["M", "F"] },
+        "passenger_type": { "type": "string", "minLength": 1 },
+        "ticket_number": { "type": "string", "pattern": "^[0-9]{13}$" },
+        "ticket_type": { "type": "integer" }
+      },
+      "additionalProperties": false
+    },
+    "routes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["airline_code", "flight_num", "depart_place", "depart_datetime", "arrive_place", "arrive_datetime", "pnr_id"]
+      }
+    }
+  },
+  "additionalProperties": false
+}
+

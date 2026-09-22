@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Личный кабинет оператора</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+    <div class="brand">
+        <span class="brand-mark">JT</span>
+        <div>
+            <strong>Java Tickets</strong>
+            <small>Docker Compose demo</small>
+        </div>
+    </div>
+    <div id="systemStatus" class="status"><span></span>Проверка сервисов</div>
+</header>
+
+<main>
+    <section class="hero">
+        <p class="eyebrow">Учебный стенд</p>
+        <h1>Личный кабинет оператора</h1>
+        <p>Поиск сегментов, продажа и возврат авиабилетов. Запросы идут через nginx в Java backend, данные сохраняются в PostgreSQL.</p>
+        <div class="architecture" aria-label="Архитектура приложения">
+            <span>Браузер</span><b>→</b><span>nginx</span><b>→</b><span>Spring Boot</span><b>→</b><span>PostgreSQL</span>
+        </div>
+    </section>
+
+    <section class="panel search-panel">
+        <div class="section-heading">
+            <div><p class="eyebrow">Поиск операций</p><h2>Билеты пассажира</h2></div>
+            <button id="showAllButton" class="button ghost">Показать все</button>
+        </div>
+
+        <div class="search-grid">
+            <form id="documentForm">
+                <label for="documentNumber">Серия и номер документа</label>
+                <div class="input-action">
+                    <input id="documentNumber" name="documentNumber" placeholder="Например, 3108111434" autocomplete="off">
+                    <button class="button primary" type="submit">Найти пассажира</button>
+                </div>
+            </form>
+            <form id="ticketForm">
+                <label for="ticketNumber">Номер билета</label>
+                <div class="input-action">
+                    <input id="ticketNumber" name="ticketNumber" placeholder="13 цифр" maxlength="13" inputmode="numeric" autocomplete="off">
+                    <button class="button primary" type="submit">Найти билет</button>
+                </div>
+                <label class="checkbox"><input id="allPassengerTickets" type="checkbox" checked> Все билеты пассажира</label>
+            </form>
+        </div>
+        <p id="searchMessage" class="message" aria-live="polite"></p>
+    </section>
+
+    <section class="panel table-panel">
+        <div class="section-heading">
+            <div><p class="eyebrow">PostgreSQL</p><h2>Сегменты перелетов</h2></div>
+            <span id="rowCount" class="counter">0 записей</span>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead><tr>
+                    <th>Билет</th><th>Пассажир</th><th>Документ</th><th>Рейс</th><th>Маршрут</th><th>Вылет</th><th>Статус</th>
+                </tr></thead>
+                <tbody id="resultsBody"><tr><td colspan="7" class="empty">Загрузка данных…</td></tr></tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="demo-grid">
+        <article class="panel action-card">
+            <p class="eyebrow">POST /api/process/sale</p>
+            <h2>Продать тестовый билет</h2>
+            <p>Создает билет из двух сегментов. Номер генерируется автоматически, чтобы демонстрацию можно было повторять.</p>
+            <button id="saleButton" class="button accent">Выполнить продажу</button>
+            <pre id="saleResult">Ответ появится здесь</pre>
+        </article>
+        <article class="panel action-card">
+            <p class="eyebrow">POST /api/process/refund</p>
+            <h2>Вернуть найденный билет</h2>
+            <p>Помечает возвращенными все сегменты выбранного билета. Повторный возврат даст HTTP 409.</p>
+            <input id="refundTicket" placeholder="Номер билета" maxlength="13" inputmode="numeric">
+            <button id="refundButton" class="button danger">Выполнить возврат</button>
+            <pre id="refundResult">Ответ появится здесь</pre>
+        </article>
+    </section>
+</main>
+
+<footer>Java 17 · Spring Boot · PostgreSQL · nginx · Docker Compose</footer>
+<script src="app.js"></script>
+</body>
+</html>
