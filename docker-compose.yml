@@ -19,6 +19,7 @@ services:
     restart: unless-stopped
 
   backend:
+    image: ghcr.io/${GHCR_OWNER:-agosset15}/java-docker-tickets-backend:${IMAGE_TAG:-latest}
     build:
       context: ./backend
     environment:
@@ -40,6 +41,7 @@ services:
     restart: unless-stopped
 
   frontend:
+    image: ghcr.io/${GHCR_OWNER:-agosset15}/java-docker-tickets-frontend:${IMAGE_TAG:-latest}
     build:
       context: ./frontend
     ports:
