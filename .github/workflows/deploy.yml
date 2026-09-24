@@ -1,7 +1,5 @@
 name: Deploy to server
 
-# Запускается после того, как workflow сборки образов успешно отработал
-# на ветке main — иначе деплой мог бы вытянуть ещё не собранные образы.
 on:
   workflow_run:
     workflows: ["Build and publish Docker images"]
@@ -30,7 +28,6 @@ jobs:
           script_stop: true
           script: |
             set -e
-            echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u "${{ secrets.GHCR_USER }}" --password-stdin
             cd "${{ secrets.DEPLOY_PATH }}"
             docker compose pull
             docker compose up -d
